@@ -106,6 +106,10 @@ var KarmaReporter = function(tc) {
 
   this.reportSpecStarting = function(spec) {
     spec.results_.time = new Date().getTime();
+    if (typeof window.__coverage__ == 'undefined') {
+        window.__coverage__ = {};
+    }
+    window.__coverage__.__current_test__ = spec.env.currentSpec.suite.description + ' ' + spec.description;
   };
 
   this.reportSpecResults = function(spec) {
